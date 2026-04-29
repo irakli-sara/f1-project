@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout(~{::main})}">
+<head>
+    <title>Contact | F1 Garage</title>
+</head>
+<body>
+<main th:fragment="main">
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <h1 class="f1-page-title">Contact <span class="f1-red">Us</span></h1>
+                    <p class="f1-text-muted mb-4">
+                        Have questions about Formula 1 cars or want to contribute to our database?
+                        Get in touch with our team.
+                    </p>
+
+                    <div class="f1-contact-info">
+                        <div class="f1-contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <span class="f1-label">Email</span>
+                                <span class="f1-value">info@f1garage.com</span>
+                            </div>
+                        </div>
+                        <div class="f1-contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <span class="f1-label">Address</span>
+                                <span class="f1-value">F1 Circuit, Racing District</span>
+                            </div>
+                        </div>
+                        <div class="f1-contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <span class="f1-label">Phone</span>
+                                <span class="f1-value">+1 234 567 890</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="f1-social-links mt-4">
+                        <a href="#" class="f1-social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="f1-social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="f1-social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="f1-social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="f1-form-card">
+                        <div class="f1-form-header">
+                            <h3 class="f1-form-title">Send Message</h3>
+                        </div>
+                        <div class="f1-form-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="contactName" class="form-label">Your Name</label>
+                                    <input type="text" class="form-control" id="contactName" placeholder="John Doe">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactEmail" class="form-label">Your Email</label>
+                                    <input type="email" class="form-control" id="contactEmail" placeholder="john@example.com">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactSubject" class="form-label">Subject</label>
+                                    <select class="form-select" id="contactSubject">
+                                        <option>General Inquiry</option>
+                                        <option>Data Contribution</option>
+                                        <option>Bug Report</option>
+                                        <option>Feature Request</option>
+                                    </select>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="contactMessage" class="form-label">Message</label>
+                                    <textarea class="form-control" id="contactMessage" rows="4" placeholder="Your message..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-f1-primary w-100">
+                                    <i class="fas fa-paper-plane me-2"></i>Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

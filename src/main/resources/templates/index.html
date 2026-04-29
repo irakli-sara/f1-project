@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout(~{::main})}">
+<head>
+    <title>Home | F1 Garage</title>
+</head>
+<body>
+<main th:fragment="main">
+    <!-- Hero Section -->
+    <section class="f1-hero">
+        <div class="f1-hero-overlay"></div>
+        <div class="container f1-hero-content">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h1 class="f1-hero-title">Formula 1<br><span class="f1-red">Racing Cars</span></h1>
+                    <p class="f1-hero-subtitle">Explore the world's most powerful racing machines.</p>
+                    <div class="f1-hero-buttons">
+                        <a th:href="@{/cars}" class="btn btn-f1-primary btn-lg">
+                            <i class="fas fa-search me-2"></i>Explore Cars
+                        </a>
+                        <a th:href="@{/teams}" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-users me-2"></i>View Teams
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="f1-hero-stats">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-4">
+                        <div class="f1-stat">
+                            <span class="f1-stat-value">370+</span>
+                            <span class="f1-stat-label">KM/H Top Speed</span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="f1-stat">
+                            <span class="f1-stat-value">1000+</span>
+                            <span class="f1-stat-label">Horsepower</span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="f1-stat">
+                            <span class="f1-stat-value">10</span>
+                            <span class="f1-stat-label">Racing Teams</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Cars Section -->
+    <section class="py-5" th:if="${recentCars != null and !recentCars.isEmpty()}">
+        <div class="container">
+            <h2 class="f1-section-title">Recent Additions</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4" th:each="car : ${recentCars}">
+                    <div class="f1-card">
+                        <div class="f1-card-image">
+                            <img th:if="${car.imageName != null}" th:src="@{/uploads/{filename}(filename=${car.imageName})}" alt="Car">
+                            <div th:unless="${car.imageName != null}" class="f1-card-placeholder">
+                                <i class="fas fa-car-side"></i>
+                            </div>
+                        </div>
+                        <div class="f1-card-body">
+                            <h5 class="f1-card-title" th:text="${car.model}">Car Model</h5>
+                            <p class="f1-card-team" th:if="${car.team != null}" th:text="${car.team.name}">Team</p>
+                            <div class="f1-card-specs">
+                                <span><i class="fas fa-tachometer-alt me-1"></i><span th:text="${car.horsepower != null ? car.horsepower : 'N/A'}">HP</span> HP</span>
+                                <span><i class="fas fa-calendar me-1"></i><span th:text="${car.season}">2024</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a th:href="@{/cars}" class="btn btn-f1-primary">
+                    <i class="fas fa-list me-2"></i>View All Cars
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

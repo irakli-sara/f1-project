@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout(~{::main})}">
+<head>
+    <title>Add Team | F1 Garage</title>
+</head>
+<body>
+<main th:fragment="main">
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="f1-form-card">
+                        <div class="f1-form-header">
+                            <h2 class="f1-form-title">
+                                <i class="fas fa-users me-2"></i>Add New Team
+                            </h2>
+                        </div>
+                        <div class="f1-form-body">
+                            <form th:action="@{/teams/save}" th:object="${team}" method="post">
+                                <input type="hidden" th:field="*{id}">
+
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Team Name *</label>
+                                    <input type="text" class="form-control" id="name"
+                                           th:classappend="${#fields.hasErrors('name')} ? 'is-invalid'"
+                                           th:field="*{name}" placeholder="e.g., Red Bull Racing">
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="country" class="form-label">Country *</label>
+                                    <input type="text" class="form-control" id="country"
+                                           th:classappend="${#fields.hasErrors('country')} ? 'is-invalid'"
+                                           th:field="*{country}" placeholder="e.g., Austria">
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="principal" class="form-label">Team Principal</label>
+                                    <input type="text" class="form-control" id="principal"
+                                           th:field="*{principal}" placeholder="e.g., Christian Horner">
+                                </div>
+
+                                <div class="d-flex gap-2">
+                                    <button type="submit" class="btn btn-f1-success">
+                                        <i class="fas fa-save me-2"></i>Save Team
+                                    </button>
+                                    <a th:href="@{/teams}" class="btn btn-outline-secondary">
+                                        <i class="fas fa-times me-2"></i>Cancel
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

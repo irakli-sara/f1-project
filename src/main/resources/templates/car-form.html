@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout(~{::main})}">
+<head>
+    <title th:text="${car.id != null ? 'Edit Car' : 'Add Car'} + ' | F1 Garage'">Add Car</title>
+</head>
+<body>
+<main th:fragment="main">
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="f1-form-card">
+                        <div class="f1-form-header">
+                            <h2 class="f1-form-title">
+                                <i class="fas fa-car me-2"></i>
+                                <span th:text="${car.id != null ? 'Edit Car' : 'Add New Car'}">Add New Car</span>
+                            </h2>
+                        </div>
+                        <div class="f1-form-body">
+                            <form th:action="${car.id != null} ? @{/cars/update/{id}(id=${car.id})} : @{/cars/save}"
+                                  th:object="${car}" method="post" enctype="multipart/form-data">
+
+                                <input type="hidden" th:field="*{id}">
+
+                                <div class="mb-3">
+                                    <label for="model" class="form-label">Model Name *</label>
+                                    <input type="text" class="form-control" id="model"
+                                           th:classappend="${#fields.hasErrors('model')} ? 'is-invalid'"
+                                           th:field="*{model}" placeholder="e.g., SF-24">
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('model')}" th:errors="*{model}"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="horsepower" class="form-label">Horsepower</label>
+                                        <input type="number" class="form-control" id="horsepower"
+                                               th:classappend="${#fields.hasErrors('horsepower')} ? 'is-invalid'"
+                                               th:field="*{horsepower}" placeholder="e.g., 1000">
+                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('horsepower')}" th:errors="*{horsepower}"></div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="topSpeed" class="form-label">Top Speed (km/h)</label>
+                                        <input type="number" class="form-control" id="topSpeed"
+                                               th:field="*{topSpeed}" placeholder="e.g., 370">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="season" class="form-label">Season *</label>
+                                    <select class="form-select" id="season"
+                                            th:classappend="${#fields.hasErrors('season')} ? 'is-invalid'"
+                                            th:field="*{season}">
+                                        <option value="">Select Season</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2019">2019</option>
+                                    </select>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('season')}" th:errors="*{season}"></div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="team" class="form-label">Team *</label>
+                                    <select class="form-select" id="team" th:field="*{team}">
+                                        <option value="">Select Team</option>
+                                        <option th:each="t : ${teams}" th:value="${t.id}" th:text="${t.name}"
+                                                th:selected="${car.team != null && car.team.id == t.id}">Team</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="file" class="form-label">Car Image</label>
+                                    <input type="file" class="form-control" id="file" name="file" accept="image/*">
+                                    <div class="form-text">Upload an image of the car (max 5MB)</div>
+                                    <div th:if="${car.imageName != null}" class="mt-2">
+                                        <img th:src="@{/uploads/{filename}(filename=${car.imageName})}"
+                                             alt="Current image" class="f1-current-image">
+                                    </div>
+                                </div>
+
+                                <div class="d-flex gap-2">
+                                    <button type="submit" class="btn btn-f1-success">
+                                        <i class="fas fa-save me-2"></i>Save Car
+                                    </button>
+                                    <a th:href="@{/cars}" class="btn btn-outline-secondary">
+                                        <i class="fas fa-times me-2"></i>Cancel
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>
