@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<footer th:fragment="footer" class="f1-footer mt-auto py-4">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 text-center text-md-start">
+                <span class="f1-footer-text">
+                    <i class="fas fa-flag-checkered me-2"></i>
+                    <span th:text="${appTitle}">F1 Garage</span>
+                </span>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <span class="f1-footer-copy">&copy; 2026 F1 Garage. All rights reserved.</span>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

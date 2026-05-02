@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout(~{::main})}">
+<head>
+    <title>Teams | F1 Garage</title>
+</head>
+<body>
+<main th:fragment="main">
+    <section class="py-5">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="f1-page-title">Formula 1 <span class="f1-red">Teams</span></h1>
+                <a th:href="@{/teams/add}" class="btn btn-f1-success">
+                    <i class="fas fa-plus"></i>Add New Team
+                </a>
+            </div>
+
+            <div class="row g-4" th:if="${teams != null and !teams.isEmpty()}">
+                <div class="col-md-6 col-lg-4" th:each="team : ${teams}">
+                    <div class="f1-team-card">
+                        <div class="f1-team-card-header">
+                            <div class="f1-team-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="f1-team-info">
+                                <h5 class="f1-team-name" th:text="${team.name}">Team Name</h5>
+                                <span class="f1-team-country" th:text="${team.country}">Country</span>
+                            </div>
+                        </div>
+                        <div class="f1-team-card-body">
+                            <div class="f1-team-detail" th:if="${team.principal != null and !team.principal.isEmpty()}">
+                                <i class="fas fa-user-tie"></i>
+                                <span th:text="${team.principal}">Team Principal</span>
+                            </div>
+                        </div>
+                        <div class="f1-team-card-footer">
+                            <a th:href="@{/cars(team=${team.name})}" class="btn btn-sm btn-f1-primary">
+                                <i class="fas fa-car me-1"></i>View Cars
+                            </a>
+                            <a th:href="@{/teams/delete/{id}(id=${team.id})}"
+                               class="btn btn-sm btn-outline-danger"
+                               onclick="return confirm('Are you sure you want to delete this team?')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div class="f1-empty-state" th:if="${teams == null or teams.isEmpty()}">
+                <i class="fas fa-users-slash"></i>
+                <h3>No Teams Found</h3>
+                <p>No teams have been added yet. Add your first team to get started.</p>
+                <a th:href="@{/teams/add}" class="btn btn-f1-primary">
+                    <i class="fas fa-plus me-2"></i>Add First Team
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>
